@@ -10,7 +10,7 @@ public class SQLInsert {
     public static final String DB_URL = "jdbc:mysql://localhost:3306/test_example?autoReconnect=true&useSSL=false";
 
     public static final String USER = "root";
-    public static final String PASSWORD = "Wys19980106!";
+    public static final String PASSWORD = "12345";
 
 
 
