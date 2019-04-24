@@ -1,13 +1,18 @@
 package com.trustwave.posproduct.posimport;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class POSBuilder {
 
     public static final String[] columns = {Constants.APPLICATION_VENDOR, Constants.WEBSITE, Constants.PAYMENT_APPLICATION, Constants.VERSION_NUMBER, Constants.APPLICATION_TYPE,
             Constants.TARGET_MARKET, Constants.REFERENCE_NUMBER, Constants.VALIDATED_ACCORDING_TO, Constants.DEPLOYMENT_NOTES, Constants.REVALIDATE_DATE,
             Constants.EXPIRY_DATE, Constants.VALIDATED_BY, Constants.DESCRIPTION};
+
+
+    //TODO: Change data type
 
     private String applicationVendor;//Application vendor
     private String website;//Website
@@ -22,6 +27,9 @@ public class POSBuilder {
     private String expiDate;//expiry date
     private String validateBy;//validated by
     private String description;//description
+
+
+
     ArrayList<String> buffer;// used for store the data temp and then build
 
     public static ArrayList<POSBuilder> posList = new ArrayList<>();
@@ -51,6 +59,34 @@ public class POSBuilder {
         }
 
     }
+
+    /**
+     * Link the version with a pos builder, specified by version and payment application;
+     * @param version
+     * @return
+     */
+
+    public static POSBuilder getPosBuilderWithVersion(String version, String paymentApp){
+        for(POSBuilder pos: posList){
+            if(pos.getVersion().equals(version) && pos.getPaymentApp().equals(paymentApp)){
+                return pos;
+            }
+        }
+
+        return null;
+
+    }
+
+
+
+    public static Map<Version, POSBuilder> constrcutVersionPosMap(){
+
+        Map<Version, POSBuilder> retval = new HashMap<>();
+
+
+        return retval;
+    }
+
 
     //get data for specific column
 
@@ -101,6 +137,9 @@ public class POSBuilder {
         return retval;
 
     }
+
+
+
 
     //setter
     public POSBuilder setApplicationVendor(String applicationVendor) {

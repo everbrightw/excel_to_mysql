@@ -1,5 +1,7 @@
 package com.trustwave.posproduct.posimport;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import com.opencsv.CSVReader;
 import java.io.FileReader;
@@ -7,10 +9,7 @@ import java.util.ArrayList;
 
 public class OpenCSVReader {
 
-    private static final String FILE_TO_READ = "files/validated_payment_application";
-
-
-    public static void storePOSintoList(final String SOURCE_FILE){
+    public static void buildPOSProductList(final String SOURCE_FILE){
         try{
             int flag = 0;
             CSVReader reader = new CSVReader(new FileReader(SOURCE_FILE));
@@ -36,6 +35,72 @@ public class OpenCSVReader {
         }
     }
 
+    /**
+     *
+     * @param SOURCE_FILE
+     * @param col col to read from CSV.
+     *            
+     * @return
+     */
+    public static Set<String> getColumns(final String SOURCE_FILE, int col){
+
+        try {
+            Set<String> retval = new HashSet<>();
+            CSVReader reader = new CSVReader(new FileReader(SOURCE_FILE));
+            String[] nextLine;
+            while((nextLine = reader.readNext())!=null){
+                int count = 0;
+                for(String line:nextLine) {
+                    if(count == 6) {//supposed: count == col; right now is hard coded
+
+                        //name
+                        retval.add(line);
+
+                    }
+                    count ++;
+
+                }
+
+            }
+            return retval;
+
+            } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        return null;
+    }
+
+    public static List<String> getColumnsUnique(final String SOURCE_FILE, int col){
+
+        try {
+            ArrayList<String> retval = new ArrayList<>();
+            CSVReader reader = new CSVReader(new FileReader(SOURCE_FILE));
+            String[] nextLine;
+            while((nextLine = reader.readNext())!=null){
+                int count = 0;
+                for(String line:nextLine) {
+                    if(count == (col-1)) {
+                        //name
+                        retval.add(line);
+
+                    }
+                    count ++;
+
+                }
+
+            }
+            return retval;
+
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        return null;
+    }
+
 
     public static void readCSVLinebyLine(final String SOURCE_FILE){
         try{
@@ -55,7 +120,7 @@ public class OpenCSVReader {
 
     }
 
-    public static ArrayList<String> getDataTypes(ArrayList<ArrayList<String>> data){
+    public static List<String> getDataTypes(List<ArrayList<String>> data){
         ArrayList<String> dataTypes = new ArrayList<String>();
         //data.get(0) hold the data types entries for the CSV file.
         for(String d : data.get(0)){
@@ -85,16 +150,9 @@ public class OpenCSVReader {
     }
 
 
-    //add a group off data to the back of dataLists
-    public static void addDataList(ArrayList<ArrayList<String>> dataLists, ArrayList<String> addThisList){
-        dataLists.add(addThisList);
-    }
-
-    //print all of the data information
     public static void printDataLists(ArrayList<ArrayList<String>> dataLists){
-        // get data types
 
-        ArrayList<String> dataTypes = getDataTypes(dataLists);
+        List<String> dataTypes = getDataTypes(dataLists);// get data types
         int flag = 2;
         for(ArrayList<String> dataList:dataLists){
             System.out.print(flag + "  ");

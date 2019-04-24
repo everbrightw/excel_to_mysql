@@ -24,7 +24,7 @@ public class Test {
 
 
 
-        OpenCSVReader.storePOSintoList(VALIDATED_PAYMENT_APPLICATION);
+        OpenCSVReader.buildPOSProductList(VALIDATED_PAYMENT_APPLICATION);
 
         POSBuilder.printList(POSBuilder.posList);
 

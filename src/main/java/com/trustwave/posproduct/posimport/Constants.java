@@ -15,6 +15,11 @@ public class Constants {
     public static final String EXPIRY_DATE = "Expiry Date";
     public static final String VALIDATED_BY = "Validated By";
     public static final String DESCRIPTION = "Description";
+    public static final String VALIDATED_PAYMENT_APPLICATION = "files/validated_payment_applications.csv";
+    public static final String OLD_POS_MANUFACTUREER_LIST = "/Users/yusen.wang/posimport/files/pos_manufacturer_PROD.csv";
+    public static final String OLD_PRODUCT_LIST = "files/pos_product_PROD1.csv";
+    public static final String VERSION_OLD_PROD = "files/pos_product_version_PROD.csv";
+    public static final String PRODUCT_OLD_PROD = "files/pos_product_PROD.csv";
 
     //this url does not need authentication.
     public static final String VALIDATE_PAYMENT_APP_URL_ =
